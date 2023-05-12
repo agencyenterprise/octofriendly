@@ -106,10 +106,10 @@ export default function Home() {
     let newFollows = 0
 
     for (const q of queue) {
-      if (!isRunning && newFollows > 1) {
-        logLine(`Stopping early`)
-        break
-      }
+      // if (!isRunning && newFollows > 1) {
+      //   logLine(`Stopping early`)
+      //   break
+      // }
       logLine(`Following ${q}...`)
 
       try {
@@ -180,9 +180,9 @@ export default function Home() {
               {!isRunning && 
                 <button type="submit" className="rounded-xl bg-blue-600 px-4 py-3" disabled={!org}>Start</button>
               }
-              {isRunning && 
+              {/* {isRunning && 
                 <button onClick={stopFollowing} className="rounded-xl">Stop</button>
-              }
+              } */}
             </form>
             <div className="mt-6 z-10 font-mono text-sm flex w-full">
               <div className="left-0 top-0 w-full border-bpb-6 pt-8 border-neutral-800 rounded-xl border lg:p-4 bg-zinc-800/30">
