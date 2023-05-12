@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'GitHub Org Follow',
+  title: 'Octofriendly',
   description: 'Follow all members of an organization',
 }
 

@@ -100,7 +100,7 @@ export default function Home() {
     console.log(members)
 
     const queue = members.filter(m => !follows.includes(m) && !follows.includes(user))
-    logLine(`Starting following of ${queue.length}`)
+    logLine(`Starting following ${queue.length} new users`)
     console.log(queue)
 
     let newFollows = 0
@@ -139,6 +139,11 @@ export default function Home() {
     location.href = '/api/auth'
   }
 
+  const logout = () => {
+    localStorage.removeItem('accessToken')
+    location.href = location.href
+  }
+
   useEffect(getKit, [params])
 
 
@@ -152,7 +157,7 @@ export default function Home() {
         </div>
 
         {!isAuthed &&
-          <button type="submit" className="rounded-xl bg-blue-600 px-4 py-3" onPress={goAuth}>Authorize GitHub</button>
+          <button type="submit" className="rounded-xl bg-blue-600 px-4 py-3" onClick={goAuth}>Authorize GitHub</button>
         }
 
         {isAuthed &&
@@ -189,8 +194,14 @@ export default function Home() {
                 )}
               </div>  
             </div>
+            <button onClick={logout} className="text-right underline mt-5">Logout</button>
+
           </>
         }
+
+        <footer className="mt-8 text-sm">
+          Created with 🐙 by <a href="https://ae.studio" className="text-orange-400 underline">ae.studio</a>
+        </footer>
         
       </main>
     </>
