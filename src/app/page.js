@@ -151,7 +151,7 @@ export default function Home() {
       <main className="flex flex-col items-center p-24 max-w-lg m-auto">
         <h1 className="text-4xl font-medium pb-8">Octofriendly</h1>
         <div className="m-0 mb-6 leading-8">
-          <p>Follow all members of an organization.</p>
+          <p>Follow all members of a GitHub org</p>
           <p className="text-zinc-500 text-sm">If you are a not a member of that organization, you will only follow publicly available members.</p>
         </div>
 
