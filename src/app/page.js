@@ -122,7 +122,6 @@ export default function Home() {
         console.log(e)
       }
       newFollows++
-      break
     }
 
     setIsRunning(false)
