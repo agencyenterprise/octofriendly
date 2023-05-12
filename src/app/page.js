@@ -10,6 +10,8 @@ export default function Home() {
   const [user, setUser] = useState(null)
   const [org, setOrg] = useState('')
   const [isRunning, setIsRunning] = useState(false)
+  const [isAuthed, setIsAuthed] = useState(null)
+
 
   const logLine = line => {
     setLog(oldLog => [...oldLog, line])
@@ -28,9 +30,10 @@ export default function Home() {
       }
 
       if (!token) {
-        alert('need to auth')
-        location.href = '/api/auth'
+        setIsAuthed(false)
         return
+      } else {
+        setIsAuthed(true)
       }
 
       octokit.current = new Octokit({ auth: token })
@@ -132,49 +135,64 @@ export default function Home() {
     setIsRunning(false)
   }
 
+  const goAuth = () => {
+    location.href = '/api/auth'
+  }
+
   useEffect(getKit, [params])
 
 
   return (
-    <main className="flex flex-col items-center p-24 max-w-lg m-auto">
-      <h1 className="text-4xl font-medium pb-8">GitHub Org Follow</h1>
-      <div className="m-0 mb-6 leading-8">
-        <p>Follow all members of an organization.</p>
-        <p className="text-zinc-500 text-sm">If you are a not a member of that organization, you will only follow publicly available members.</p>
-      </div>
-
-      <form onSubmit={startFollowing} className="w-full">
-        <div className="w-full">
-          <label htmlFor="org" className="text-md leading-6 text-white">
-            Organization
-          </label>
-          <div className="mt-2">
-            <input
-              type="text"
-              id="org"
-              className="mb-3 block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              placeholder="agencyenterprise"
-              value={org}
-              onChange={e => setOrg(e.target.value)}
-            />
-          </div>
+    <>
+      <main className="flex flex-col items-center p-24 max-w-lg m-auto">
+        <h1 className="text-4xl font-medium pb-8">Octofriendly</h1>
+        <div className="m-0 mb-6 leading-8">
+          <p>Follow all members of an organization.</p>
+          <p className="text-zinc-500 text-sm">If you are a not a member of that organization, you will only follow publicly available members.</p>
         </div>
-        {!isRunning && 
-          <button type="submit" className="rounded-xl bg-blue-600 px-4 py-3" disabled={!org}>Start</button>
+
+        {!isAuthed &&
+          <button type="submit" className="rounded-xl bg-blue-600 px-4 py-3" onPress={goAuth}>Authorize GitHub</button>
         }
-        {isRunning && 
-          <button onClick={stopFollowing} className="rounded-xl">Stop</button>
-        }
-      </form>
-      <div className="mt-6 z-10 font-mono text-sm flex w-full">
-        <div className="left-0 top-0 w-full border-bpb-6 pt-8 border-neutral-800 rounded-xl border lg:p-4 bg-zinc-800/30">
-          {log.map((line, k) => 
-            <div key={k}>
-              {line}
+
+        {isAuthed &&
+          <>
+            <form onSubmit={startFollowing} className="w-full">
+              <div className="w-full">
+                <label htmlFor="org" className="text-md leading-6 text-white">
+                  Organization
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="org"
+                    className="mb-3 block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    placeholder="agencyenterprise"
+                    value={org}
+                    onChange={e => setOrg(e.target.value)}
+                  />
+                </div>
+              </div>
+              {!isRunning && 
+                <button type="submit" className="rounded-xl bg-blue-600 px-4 py-3" disabled={!org}>Start</button>
+              }
+              {isRunning && 
+                <button onClick={stopFollowing} className="rounded-xl">Stop</button>
+              }
+            </form>
+            <div className="mt-6 z-10 font-mono text-sm flex w-full">
+              <div className="left-0 top-0 w-full border-bpb-6 pt-8 border-neutral-800 rounded-xl border lg:p-4 bg-zinc-800/30">
+                {log.map((line, k) => 
+                  <div key={k}>
+                    {line}
+                  </div>
+                )}
+              </div>  
             </div>
-          )}
-        </div>  
-      </div>
-    </main>
+          </>
+        }
+        
+      </main>
+    </>
   )
 }
