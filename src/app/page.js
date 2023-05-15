@@ -242,7 +242,7 @@ export default function Home() {
               } */}
             </form>
             <div className="mt-6 z-10 font-mono text-sm flex w-full">
-              <div className="left-0 top-0 w-full border-bpb-6 pt-8 pb-8 border-neutral-800 rounded-xl border lg:p-4 bg-zinc-800/30">
+              <div className="left-0 top-0 w-full border-bpb-6 border-neutral-800 rounded-xl border p-4 bg-zinc-800/30">
                 {log.map((line, k) => (
                   <div key={k}>{line}</div>
                 ))}
