@@ -257,6 +257,11 @@ export default function Home() {
             ae.studio
           </a>
         </footer>
+        <script
+          async
+          defer
+          src="https://scripts.simpleanalyticscdn.com/latest.js"
+        ></script>
       </main>
     </>
   );
