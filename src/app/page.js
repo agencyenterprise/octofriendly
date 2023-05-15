@@ -1,5 +1,4 @@
 "use client";
-import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 import Script from "next/script";
 import { Octokit } from "octokit";
@@ -149,7 +148,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
+      <head>
         <title>
           Octofriendly - Automatically follow users from a Github organization
         </title>
@@ -190,7 +189,7 @@ export default function Home() {
           property="twitter:image"
           content="https://octofriendly.com/og.png"
         />
-      </Head>
+      </head>
       <main className="flex flex-col items-center p-24 max-w-lg m-auto">
         <h1 className="text-4xl font-medium pb-8">Octofriendly</h1>
         <div className="m-0 mb-6 leading-8">
@@ -243,7 +242,7 @@ export default function Home() {
               } */}
             </form>
             <div className="mt-6 z-10 font-mono text-sm flex w-full">
-              <div className="left-0 top-0 w-full border-bpb-6 pt-8 border-neutral-800 rounded-xl border lg:p-4 bg-zinc-800/30">
+              <div className="left-0 top-0 w-full border-bpb-6 pt-8 pb-8 border-neutral-800 rounded-xl border lg:p-4 bg-zinc-800/30">
                 {log.map((line, k) => (
                   <div key={k}>{line}</div>
                 ))}
