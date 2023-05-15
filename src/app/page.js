@@ -150,6 +150,8 @@ export default function Home() {
       <title>
         Octofriendly - Automatically follow users from a Github organization
       </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" type="image/png" href="/logo.png" />
       <meta
         name="title"
         content="Octofriendly - Automatically follow users from a Github organization"
@@ -198,7 +200,7 @@ export default function Home() {
         {!isAuthed && (
           <button
             type="submit"
-            className="rounded-xl bg-blue-600 px-4 py-3"
+            className="rounded-xl bg-blue-600 px-4 py-3 text-white"
             onClick={goAuth}
           >
             Authorize GitHub
@@ -209,7 +211,7 @@ export default function Home() {
           <>
             <form onSubmit={startFollowing} className="w-full">
               <div className="w-full">
-                <label htmlFor="org" className="text-md leading-6 text-white">
+                <label htmlFor="org" className="text-md leading-6">
                   Organization
                 </label>
                 <div className="mt-2">
@@ -226,7 +228,7 @@ export default function Home() {
               {!isRunning && (
                 <button
                   type="submit"
-                  className="rounded-xl bg-blue-600 px-4 py-3"
+                  className="rounded-xl bg-blue-600 px-4 py-3 text-white"
                   disabled={!org}
                 >
                   Start
