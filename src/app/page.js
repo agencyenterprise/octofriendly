@@ -256,7 +256,7 @@ export default function Home() {
 
         <footer className="mt-8 text-sm">
           Created with 🐙 by{" "}
-          <a href="https://ae.studio" className="text-orange-400 underline">
+          <a href="https://ae.studio?utm_source=sds&utm_medium=referral&utm_campaign=octofriendly&utm_content=footer&utm_term=3ff5251a-e107-4d47-bfb8-" className="text-orange-400 underline">
             ae.studio
           </a>
         </footer>
