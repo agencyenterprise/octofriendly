@@ -2,9 +2,9 @@
 import { useSearchParams } from "next/navigation";
 import Script from "next/script";
 import { Octokit } from "octokit";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 
-export default function Home() {
+function HomeContent() {
   const params = useSearchParams();
   const octokit = useRef(null);
   const [log, setLog] = useState([]);
@@ -256,7 +256,10 @@ export default function Home() {
 
         <footer className="mt-8 text-sm">
           Created with 🐙 by{" "}
-          <a href="https://ae.studio?utm_source=sds&utm_medium=referral&utm_campaign=octofriendly&utm_content=footer&utm_term=3ff5251a-e107-4d47-bfb8-" className="text-orange-400 underline">
+          <a
+            href="https://ae.studio?utm_source=sds&utm_medium=referral&utm_campaign=octofriendly&utm_content=footer&utm_term=3ff5251a-e107-4d47-bfb8-"
+            className="text-orange-400 underline"
+          >
             ae.studio
           </a>
         </footer>
@@ -267,5 +270,19 @@ export default function Home() {
         ></Script>
       </main>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-col items-center p-24 max-w-lg m-auto">
+          <h1 className="text-4xl font-medium pb-8">Loading...</h1>
+        </div>
+      }
+    >
+      <HomeContent />
+    </Suspense>
   );
 }
